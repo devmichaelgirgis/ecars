@@ -10,15 +10,19 @@ Sample car sales and service application. Pulsar is a fictitious electric car ma
 
 ## Table of Contents
 
--   [Features](#features)
--   [Installation](#installation)
-    -   [Prerequisites](#prerequisites)
-    -   [Automated Deploy](#automated-deploy)
-    -   [Manual Deploy](#manual-deploy)
-    -   [Teardown](#teardown)
--   [Demo Highlights](#demo-highlights)
--   [Additional Resources](#additional-resources)
--   [Development](#development)
+-   [eCars](#ecars)
+    -   [Table of Contents](#table-of-contents)
+    -   [Installation](#installation)
+        -   [Prerequisites](#prerequisites)
+            -   [SSH Key For Heroku Deploys](#ssh-key-for-heroku-deploys)
+        -   [Automated Deploy](#automated-deploy)
+        -   [Manual Deploy](#manual-deploy)
+        -   [Teardown](#teardown)
+    -   [Demo Highlights](#demo-highlights)
+    -   [Additional Resources](#additional-resources)
+        -   [Scale IoT Car Diagnostic Data with Apache Kafka](#scale-iot-car-diagnostic-data-with-apache-kafka)
+        -   [Archive IoT Car Diagnostic Data with Postgres](#archive-iot-car-diagnostic-data-with-postgres)
+    -   [Development](#development)
 
 ## Installation
 
@@ -56,7 +60,7 @@ This project consists of multiple "apps" consolidated into one monorepo so that 
 The `ecarsDeploy.js` script will create and deploy code to a Salesforce scratch org and then deploy four Heroku apps along with some Postgres databases.
 
 ```console
-$ sfdx force:auth:web:login -d -a DevHub  # Authenticate using your Dev Hub org credentials
+$ sfdx auth:web:login -d -a DevHub  # Authenticate using your Dev Hub org credentials
 $ heroku login  # Login with your Heroku account (or create one)
 $ git clone git@github.com:trailheadapps/ecars.git
 $ cd ecars/scripts
@@ -80,7 +84,7 @@ The below steps do everything the [Automated Deploy](#automated-deploy) does. It
 1. Authenticate with the `sfdx` and `heroku` CLI commands and get the eCars code onto your computer.
 
     ```console
-    $ sfdx force:auth:web:login -d -a DevHub  # Authenticate using your Dev Hub org credentials
+    $ sfdx auth:web:login -d -a DevHub  # Authenticate using your Dev Hub org credentials
     $ heroku login  # Login with your Heroku account (or create one)
     $ git clone git@github.com:trailheadapps/ecars.git
     ```
@@ -186,7 +190,7 @@ The below steps do everything the [Automated Deploy](#automated-deploy) does. It
     1. Set config vars
 
         ```console
-        $ heroku config:set VAPID_PUBLIC_KEY=[VAPID PUBLIC KEY] VAPID_PRIVATE_KEY=[VAPID PRIVATE KEY] SF_USERNAME=[SCRATCH ORG USERNAME] SF_PASSWORD=[SCRATCH ORG USER'S PASSWORD] SF_TOKEN=[SCRATCH ORG USER'S TOKEN] --app=[MICROSERVICES APP NAME]
+        $ heroku config:set VAPID_PUBLIC_KEY=[VAPID PUBLIC KEY] VAPID_PRIVATE_KEY=[VAPID PRIVATE KEY] SF_USERNAME=[SCRATCH ORG USERNAME] SF_PASSWORD=[SCRATCH ORG USER'S PASSWORD] SF_TOKEN=[SCRATCH ORG USER'S TOKEN] SF_LOGIN_URL=[SCRATCH ORG LOGIN URL] --app=[MICROSERVICES APP NAME]
         ```
 
 1. Deploy source to the **Saleforce scratch org**
